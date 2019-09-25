@@ -1,0 +1,153 @@
+module work_unity(data_changing,data_warn,ds_data,data_get_complete,p_para,i_para,d_para,heater_open,fan_open,work_c,high_len);
+input data_changing;   //标记数码管处于温度显示状态还是调整报警值状态 
+input [11:0]data_warn;		//报警数据
+input	[11:0]ds_data;  		//温度传感器数据
+input data_get_complete;	
+input [9:0]p_para;			//PID参数
+input [9:0]i_para;
+input [9:0]d_para;
+output reg heater_open;   //加热器开启指示
+output reg fan_open;      //风扇开启指示
+output reg work_c;        //工作指示，0在测温，1工作在变温
+output reg signed[15:0]high_len;	//高电平时长
+		//主要是对ds_data进行处理，pid算法的使用
+parameter state_0  = 0;
+parameter state_1  = 1;
+parameter state_2  = 2;
+parameter state_3  = 3;
+parameter state_4  = 4;
+parameter state_5  = 5;
+parameter state_6  = 6;
+parameter state_7  = 7;
+parameter state_8  = 8;
+parameter state_9  = 9;
+parameter state_10  = 10;
+parameter state_11  = 11;
+parameter state_12  = 12;
+parameter state_13  = 13;
+parameter state_14  = 14;
+parameter state_15  = 15;
+
+always @(posedge data_get_complete)
+begin
+   if(!data_changing)//标记数码管处于温度显示状态还是调整报警值状态   
+	begin
+      temp_cont;      //数码管工作在温度显示状态，进行测量等其他操作
+   end
+	else					//数码管正在调整报警值，不进行测量等其他操作
+	begin			
+	    heater_open<=0;
+		 contCMD<=0;
+		 work_c<=0;
+		 hter_error<=0;
+		 hter_perror<=0;
+		 hter_esum<=0;
+		 hter_d<=0;
+		 high_len<=0;
+	end
+end
+
+reg signed[15:0]hter_error;   //误差
+reg signed[15:0]hter_perror; 	//前一次误差
+reg signed[15:0]hter_esum;    //误差积分和
+reg signed[15:0]hter_d;
+
+task heater_get;//是否进行加热
+begin
+	hter_perror=hter_error;
+	if(data_warn>ds_data)//计算测量的温度与预警值的差值
+		hter_error=data_warn-ds_data;
+	else
+	   begin
+		    hter_error=ds_data-data_warn;
+          hter_error=hter_error*(-1);			 
+		end
+	if(hter_error<0)//当前温度°C
+	   begin
+	      high_len<=0;
+	   end
+	else if(hter_error-10>0)//当前温度小于预警值超过1°C
+	      high_len<=1000;
+			else
+				begin	
+				if(hter_error>=2)//当前温度距离预警值(不到0.2°C)
+					begin
+						hter_esum=hter_error+hter_esum;
+						end
+				hter_d=hter_error-hter_perror;
+				high_len=hter_error*p_para+hter_esum*i_para/3+hter_d*d_para*100;//由PID参数计算得到PWM波的高电平时长
+				if(high_len>1000)
+					begin
+						high_len=15'd1000;
+					end
+				else if(high_len<0)
+						begin	   
+							high_len=15'd0;
+						end	
+			end
+end
+endtask
+
+reg [3:0]contCMD;
+reg [15:0]Count20000;
+reg [11:0]Count1000;
+reg [3:0]Count50;
+reg [11:0]cont_fin;
+reg [3:0]judge;
+
+task temp_cont;
+begin
+      case(contCMD)
+		state_0:
+		begin
+		   work_c<=0;//工作指示，0在测温，1在工作变温器
+			fan_open<=0;//风扇关闭
+			if(data_warn>(ds_data+12'd10)||ds_data>(data_warn+12'd10)) contCMD<=state_1;
+		end
+		state_1:
+		begin
+		   work_c<=1;
+		   if(ds_data==data_warn) contCMD<=state_2;
+			heater_get;
+		   if(ds_data>data_warn+10)//当前温度超过预警值1.5°C以上，开风扇
+         begin		
+ 	   	   fan_open<=1;
+				heater_open<=0;
+         end
+			else //否则开启加热
+			    begin
+			       fan_open<=0;
+					 heater_open<=1;
+			    end
+		end
+		state_2:
+		begin
+		   if(ds_data==data_warn)
+			   begin
+				   if(judge==16)//延时测量，排除偶然误差
+					   contCMD<=state_3;
+					else
+					   judge<=judge+1;
+			   end
+			else
+			   begin
+			      contCMD<=state_1;
+			   end
+		end
+		state_3:
+		begin
+		   if(ds_data==data_warn)
+			   begin
+				   contCMD<=state_0;
+					work_c<=0;
+			   end
+			else
+			   begin
+			      contCMD<=state_1;
+			   end
+		end
+		endcase
+end
+endtask
+
+endmodule 

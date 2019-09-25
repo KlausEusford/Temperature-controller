@@ -1,0 +1,661 @@
+module ds18b20_test(clk,icdata,data,Flag_CmdSET);
+input clk;//clk 1Mhz 
+inout reg icdata;		//DS18B20的数据总线 双向口
+output	reg [11:0]data;//温度值的10倍
+output   reg Flag_CmdSET;
+//reg icdata;
+reg	[19:0]tempre_temp;//用来存放温度值的10000倍
+
+
+parameter state_0  = 0;
+parameter state_1  = 1;
+parameter state_2  = 2;  
+parameter state_3  = 3;
+parameter state_4  = 4;
+parameter state_5  = 5;
+parameter state_6  = 6;
+parameter state_7  = 7;
+parameter state_8  = 8;
+parameter state_9  = 9;
+parameter state_10  = 10;
+parameter state_11  = 11;
+parameter state_12  = 12;
+parameter state_13  = 13;
+parameter state_14  = 14;
+parameter state_15  = 15;
+parameter state_16  = 16;
+parameter state_17  = 17;
+
+always@(posedge clk )//or negedge nReset	
+begin
+	CmdSETDS18B20;									//时钟上升沿就进行CmdSETDS18B20任务
+end
+
+
+
+
+reg Flag_Rst;         		//复位完成标志
+reg [4:0] Rststate;        //复位状态 
+reg [10:0] CountRstStep;   //复位计数器 1024
+
+
+
+task Rst_DS18B20;				//DS18B20复位任务
+	begin
+	 case(Rststate)
+	 state_0 :          //out 1 ,keep 1us
+			 begin
+			  Flag_Rst <= 0;       //复位进行中
+			  icdata <= 1;       //总线拉高 
+			  CountRstStep <= 0;		  
+			  Rststate <= state_1;
+			 end 
+	 state_1 :
+			 begin
+			  icdata <= 0;       //总线拉低
+			  if(CountRstStep > 600)     //拉低时间600us
+				  begin
+					CountRstStep <= 0;     //计数器清0
+					Rststate <= state_2;    
+				    icdata <= 1;       //总线拉高
+				  end 
+			  else 
+				  begin   
+					CountRstStep <= CountRstStep + 1'b1; 
+					Rststate <= state_1;    //计时未到
+				  end
+			 end 
+	 state_2 :         
+			 begin
+				  if(CountRstStep > 60)     //拉高时间60us
+					  begin
+						CountRstStep <= 0;     //计数器清0
+						Rststate <= state_3;
+					  end
+				  else
+					  begin
+						CountRstStep <= CountRstStep +1'b1;
+						Rststate <= state_2;    //计时未到
+					  end  
+			 end
+	 state_3 :
+			 begin
+			  icdata <= 1'bz;       //释放总线
+			  Rststate <= state_4;
+			 end
+	 state_4 :
+			 begin
+				  if(CountRstStep > 6)     //延时时间6us
+					  begin
+						CountRstStep <= 0;     //计数器清0
+						Rststate <= state_5;
+					  end
+				  else
+					  begin
+						CountRstStep <= CountRstStep +1'b1;
+						Rststate <= state_4;    //计时未到
+					  end  
+			 end
+	 state_5 :
+			 begin
+				  if(icdata == 1'b0)       //初始化完成  1，妈的，满满的都是陷阱啊！！
+						  begin
+							CountRstStep <= 0;
+							Rststate <= state_6;    //结束
+						  end
+				  else
+						begin
+						CountRstStep <= 0;
+						Rststate <= state_9;    //等待一会儿，重新回到0
+						end
+						 
+			 end
+	 state_6 :
+		begin
+			if(CountRstStep == 240)			//维持输入状态450us//60~240us
+				  begin
+					CountRstStep <= 0;
+					Rststate <= state_7;  
+				  end
+			  else
+				  begin
+					CountRstStep <= CountRstStep + 1'b1;
+					Rststate <= state_6;  
+				  end
+		end
+	 state_7 :
+			 begin
+			  if(icdata == 1'b1)//如果输出跳回了1
+				  begin
+					Rststate <= state_8;  
+				  end
+			  else
+				  begin
+					Rststate <= state_0;  
+				  end
+			 end 
+	 state_8 :
+			 begin
+			  Flag_Rst <= 1;       //初始化完成
+			  CountRstStep <= 0;
+			  icdata <= 1'b1;
+			  Rststate <= state_0;     //回到原点
+			 end
+			 
+	state_9 :
+			 begin
+				if(CountRstStep > 300)
+					begin
+					 CountRstStep <= 0;
+					 Rststate <= state_0;
+					end
+				else
+					begin
+					 CountRstStep <= CountRstStep + 1'b1;
+					 Rststate <= state_9;
+					end 
+			end
+			
+	 default :
+			 begin
+			  CountRstStep <= 0;
+			  Rststate <= state_0;      
+			 end 
+	 endcase
+	end
+endtask 
+
+
+
+
+
+
+reg[4:0] i;     				//一个字8个位，多出一个数量级已用于判断
+reg Flag_Write;       		//写命令完成标志与写位
+reg[4:0] WrState;       	//写命令状态
+initial WrState=5'b00000;
+
+task Write_DS18B20;			//DS18B20写字节任务
+	input [7:0] dcmd;        //命令
+	reg	[7:0] indcmd;
+	
+	begin	
+		 case(WrState)
+			 state_0 :
+				 begin
+					Flag_Write <= 0;      //写命令过程中
+					WrState <= state_1; 
+					indcmd <= dcmd;
+					icdata <= 1'b1;	
+					i <= 0; 
+				 end
+			 state_1 :
+				 begin 
+					if(i < 8)
+						begin
+							//   wBit <= dcmd & 1;     //命令取1位
+							wBit_DS18B20(dcmd[i]); //indcmd[i]
+							if(Flag_wBit)      //写完1位
+								begin
+//								 indcmd = indcmd >> 1;  //右移1位
+								 i <= i + 1'b1;      //位数加1			 
+								end
+							WrState <= state_1;    //重复加写位
+					  end
+				  else          //写完8位
+						begin
+						WrState <= state_2;    
+						i <= 5'd0;
+						end 
+					
+				 end
+			 state_2 :
+				begin
+				icdata<=1'b1;
+				WrState <= state_3;
+				end
+			 state_3 :
+				begin
+				WrState <= state_4;
+				end
+			state_4:
+				 begin
+				  Flag_Write <= 1'b1;      //写命令完毕
+				  indcmd <= 0;
+				  WrState <= state_0;
+				 end
+			 default :
+				 begin
+					Flag_Write <= 1'b0;
+					WrState<=state_0;
+					Flag_Write <= 1'b0;
+				 end
+		 endcase
+	end
+
+endtask 
+ 
+ 
+
+
+
+reg Flag_wBit;         		//写位完成标志
+reg[4:0] WriteBitstate;    //写位命令
+reg[7:0] CountWbitStep;    //写位计数器
+
+task wBit_DS18B20;			//DS18B20写位任务
+input wiBit;          //位信息
+	begin 
+		 case(WriteBitstate)
+		 state_0 :
+			 begin
+			  Flag_wBit <= 1'b0;       //写位进行中
+			  icdata <= 1'b0;       //总线拉低			  
+			  CountWbitStep <= 8'd0;
+			  WriteBitstate <= state_1;
+			 end 
+		 state_1 :
+			 begin
+			  if(CountWbitStep>15)//维持低电平15us
+				begin
+				  CountWbitStep<=8'd0;
+				  WriteBitstate <= state_2;
+				end
+			  else
+				begin
+					CountWbitStep<=CountWbitStep+1'b1;
+					WriteBitstate <= state_1;
+				end
+			 end 
+		 state_2 :
+			 begin
+				if(wiBit)
+					begin
+					icdata <= 1;
+					WriteBitstate <= state_3;
+					end
+				else
+					begin
+					icdata <= 0;
+					WriteBitstate <= state_3;
+					end
+			 end
+		 state_3 :
+				begin
+				  if(CountWbitStep >= 60)     //维持拉高电平60us
+					  begin
+						CountWbitStep <= 0;
+						WriteBitstate <= state_4;
+					  end
+				  else
+					  begin
+						CountWbitStep <= CountWbitStep + 1'b1; //继续计数
+						WriteBitstate <= state_3;
+					  end				  
+				end 
+		 state_4 :
+			 begin
+			 icdata <= 1;
+			 WriteBitstate <= state_5;
+			 end
+		 state_5 :
+			 begin
+			  if(CountWbitStep >= 3)     //拉高总线3us
+				  begin
+					CountWbitStep <= 0;
+					WriteBitstate <= state_6;
+				  end
+			  else
+				  begin
+					CountWbitStep <= CountWbitStep + 1'b1;
+					WriteBitstate <= state_5;
+				  end
+			 end 
+		 state_6 :         
+			 begin
+			  Flag_wBit <= 1;       //写位命令完毕
+			  CountWbitStep <= 0;
+			  WriteBitstate <= state_0;
+
+			 end
+		 default :
+			 begin
+			  Flag_wBit <= 0;
+			  CountWbitStep <= 0;
+			  WriteBitstate <= state_0; 
+			 end 
+		endcase
+	end
+endtask
+
+
+
+
+reg[3:0] j;
+reg[7:0] ResultDS18B20; 	//读到的结果
+reg Flag_Read;         		//读命令标志
+reg [15:0] Readstate;      //读命令状态
+
+
+
+task Read_DS18B20;			//DS18B20读任务			
+	begin
+		 case(Readstate)
+			 state_0 :
+				 begin
+				  Flag_Read <= 0;       //读命令进行中
+				  Readstate <= state_1;
+				  j <= 0;
+				 end
+			 state_1 :
+				 begin
+					  rBit_DS18B20;
+					  if(Flag_rBit)
+						  begin
+								if(temp)
+								begin
+								ResultDS18B20 = ResultDS18B20 | 8'b10000000;
+								end
+								if(j < 7)
+									begin
+									 ResultDS18B20 = ResultDS18B20 >> 1; 
+									 j <= j + 1'b1;
+									 Readstate <= state_1;
+									end 
+								else
+									begin
+									 Readstate <= state_2;    //读完1个byte
+									 
+									 j <= 0;
+									end   
+						  end
+					  else Readstate <= state_1;  
+				 end
+			 state_2 : 
+				 begin
+				  Flag_Read <= 1;       //读命令完成
+				  Readstate <= state_0;
+				 end
+			 default : 
+				 begin
+				  Flag_Read <= 0;
+				  Readstate <= state_0;
+				 end
+		 endcase
+	end 
+endtask  
+
+ 
+
+ 
+reg Flag_rBit,temp;        //读位命令标志
+reg[15:0] ReadBitstate;    //读位命令状态
+reg[15:0] CountRbitStep;    //读位命令计时器
+
+task rBit_DS18B20;			//DS18B20读位任务
+	begin
+		 case(ReadBitstate)
+				 state_0 :
+					 begin
+					  Flag_rBit <= 1'b0;       //读位命令进行中
+					  icdata <= 1'b0;       //总线拉低
+					  CountRbitStep <= 16'd0;
+					  ReadBitstate <= state_1;
+					 end
+				 state_1 :
+					 begin
+						if(CountRbitStep >= 2)     //保持低电平2us
+							begin
+							icdata <= 1'b1;      //再将总线拉高
+							CountRbitStep <= 0;		//计数清零
+							ReadBitstate <= state_2;			//跳状态2
+							end
+						else
+							begin
+							CountRbitStep <= CountRbitStep + 1'b1;	//计数没到2继续+1
+							ReadBitstate <= state_1;
+							end  
+					 end
+				state_2 :
+					 begin
+					 if(CountRbitStep >= 4)     //保持高电平4us
+							begin	
+							icdata <= 1'bz;      //改为输入
+							CountRbitStep <= 16'd0; 			//计数清零
+							ReadBitstate <= state_3;
+							end
+						else
+							begin
+							CountRbitStep <= CountRbitStep + 1'b1;		//没到4继续+1
+							ReadBitstate <= state_2;
+							end  
+					 end
+				state_3 :
+					 begin
+						  if(CountRbitStep >= 2)     //维持输入状态2us
+							  begin
+							  if(icdata)				//如果总线不是0
+								begin
+									temp <= 1'b1;    //输出1 temp=1
+									data=data+1'b1;	//data+1
+									end
+								else 
+									begin
+									temp <= 1'b0;      //输出0
+									
+								end
+								
+								CountRbitStep <= 16'd0;
+								ReadBitstate <= state_4;
+							  end
+						  else
+								  begin
+									CountRbitStep <= CountRbitStep + 1'b1;		//没到2继续加1
+									ReadBitstate <= state_3;   
+								  end
+					 end
+				state_4 :
+					 begin
+					  if(CountRbitStep >= 60)     //维持60us输入
+						  begin
+							CountRbitStep <= 16'd0;
+							ReadBitstate <= state_5; 
+						  end
+					  else
+						  begin
+							CountRbitStep <= CountRbitStep + 1'b1;
+							ReadBitstate <= state_4; 
+						  end     
+					 end
+				state_5 :
+					 begin
+					  icdata<=1'b1;            //释放总线，置1
+					  Flag_rBit <= 1'b1;       //读位命令完毕
+					  CountRbitStep <= 16'd0;
+					  ReadBitstate <= state_0; 
+					 end
+				default :
+					 begin
+					  Flag_rBit <= 1'b0;
+					  CountRbitStep <= 16'd0;
+					  ReadBitstate <= state_0;  
+					 end
+		 endcase
+	end 
+endtask 
+
+
+
+
+
+reg [15:0] CmdSETstate;
+reg [15:0] Count65535;
+reg [3:0] Count12;
+reg [7:0] Resultl,Resulth;//,Result
+reg	[15:0]Result_all;
+//reg [3:0] decide;
+initial CmdSETstate = 16'b0000000000000000;
+//initial CmdSETstate = state_12;
+
+
+
+task CmdSETDS18B20;			//DS18B20整体任务
+	begin
+		 case(CmdSETstate)
+/*		 state_12:
+		    begin
+		        Rst_DS18B20;
+				  if(!Flag_Rst)
+				     CmdSETstate <= state_12;
+				  else 
+				  begin
+					CmdSETstate <= state_13;
+					end
+		    end
+		 state_13:
+		    begin
+			  Write_DS18B20(8'h4E);
+			  if(!Flag_Write)CmdSETstate <= state_13;
+			  else CmdSETstate <= state_14;			    
+			 end
+		 state_14:
+		    begin
+			  Write_DS18B20(8'h7F);
+			  if(!Flag_Write)CmdSETstate <= state_14;
+			  else CmdSETstate <= state_15;			    
+			 end
+		 state_15:
+		    begin
+			  Write_DS18B20(8'h00);
+			  if(!Flag_Write)CmdSETstate <= state_15;
+			  else CmdSETstate <= state_16;			    
+			 end
+		 state_16:
+		    begin
+			  Write_DS18B20(8'h1F);
+			  if(!Flag_Write)CmdSETstate <= state_16;
+			  else CmdSETstate <= state_0;			    
+			 end		*/	 			 			 
+		 state_0 :
+			 begin
+			  Flag_CmdSET = 0;
+			  Rst_DS18B20;
+			  if(!Flag_Rst)	  
+				  begin
+				  CmdSETstate <= state_0;
+				  end			  
+			  else 
+				begin
+				CmdSETstate <= state_1;
+				end
+			 end
+		 state_1 :
+			 begin
+			  Write_DS18B20(8'hCC);
+			  if(!Flag_Write)CmdSETstate <= state_1;
+			  else CmdSETstate <= state_2;
+			 end
+		 state_2 : 
+			 begin
+			  Write_DS18B20(8'h44);
+			  if(!Flag_Write)CmdSETstate <= state_2;
+			  else CmdSETstate <= state_3;//state_3
+			 end
+		 state_3 :														//state_3和state_4完成延时12*65535us=786420us=786.42ms
+		 begin														//为啥这么做？为啥不用一个state完成？？？？
+			  if(Count65535 == 65535)									
+				  begin
+					Count65535 <= 0;
+					CmdSETstate <= state_4;
+				  end
+			  else
+				  begin
+					Count65535 <= Count65535 + 1'b1;
+					CmdSETstate <= state_3;
+				  end    
+			 end
+		 state_4 :
+			 begin
+			  if(Count12 == 13)
+				  begin
+					Count12 <= 0;
+					CmdSETstate <= state_5;
+				  end
+			  else
+			  begin
+				Count12 <= Count12 + 1'b1;
+				CmdSETstate <= state_3;
+			  end   
+			 end  
+		 state_5 :
+			 begin
+				Rst_DS18B20;
+				if(!Flag_Rst)
+					CmdSETstate <= state_5;
+				else 
+					begin
+					CmdSETstate <= state_6;
+					end
+			 end		 
+		 state_6 :
+			 begin
+			  Write_DS18B20(8'hcc);
+			  if(!Flag_Write)CmdSETstate <= state_6;
+			  else CmdSETstate <= state_7;
+			 end 
+		 state_7 : 
+			 begin
+				Write_DS18B20(8'hbe);
+			  if(!Flag_Write)CmdSETstate <= state_7;
+			  else CmdSETstate <= state_8;
+			 end 
+		 state_8 :
+			 begin		
+			  Read_DS18B20;
+			  if(!Flag_Read)CmdSETstate <= state_8;
+			  else
+				  begin
+					Resultl = ResultDS18B20;
+				   ResultDS18B20 <= 8'b00000000;
+					CmdSETstate <= state_9;
+				  end 
+			 end  
+		 state_9 :
+			 begin
+			  Read_DS18B20;
+			  if(!Flag_Read)CmdSETstate <= state_9;
+			  else
+			  begin
+				Resulth = ResultDS18B20;
+				ResultDS18B20 <= 8'b00000000;
+				CmdSETstate <= state_10;
+			  end 
+
+			 end  
+		 state_10 :
+			 begin
+			  Result_all=Resulth;
+			  Result_all=Result_all<<8;
+			  Result_all=Result_all|Resultl;
+			  tempre_temp=Result_all;
+			  tempre_temp=tempre_temp*10;		//温度的10倍
+			  data<=tempre_temp/16;
+			  CmdSETstate <= state_11;
+			 end 
+		 state_11 : 
+			 begin
+			  Flag_CmdSET <= 1;
+			  CmdSETstate <= state_0;
+			 end
+		 default :
+			 begin
+			  Flag_CmdSET = 0;
+			  CmdSETstate <= state_0; 
+			 end
+		 endcase
+	end
+endtask 
+
+endmodule 
+
+

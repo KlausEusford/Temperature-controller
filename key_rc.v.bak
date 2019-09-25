@@ -1,0 +1,129 @@
+module key_rc(clk,key1,key2,key3,key1_out,key2_out,key3_out);
+input		clk;				//1K
+input		key1;
+input		key2;
+input		key3;
+output	reg	key1_out;
+output	reg	key2_out;
+output	reg	key3_out;
+
+initial key1_out=1'b0;
+initial key2_out=1'b0;
+initial key3_out=1'b0;
+
+parameter state_0  = 0;
+parameter state_1  = 1;
+parameter state_2  = 2;
+parameter state_3  = 3;
+parameter state_4  = 4;
+parameter state_5  = 5;
+parameter state_6  = 6;
+parameter state_7  = 7;
+parameter state_8  = 8;
+parameter state_9  = 9;
+
+
+reg	[3:0]key_state;   //4位宽 0-15数值
+reg	[7:0]key_count;
+reg	[2:0]key_value;
+
+always @(posedge clk)
+	begin
+		case(key_state)
+		 state_0 :          
+				 begin
+				 if(key1&key2&key3)//如果没有按键按下，则停在state_0   这里怎么没用&&？  按下是0 不按是1
+						key_state<=state_0;
+					 else					 //如果有一个或多个按键按下，则到state_1
+						key_state<=state_1;
+				 end 
+		 state_1 :
+				 begin
+					if(key_count > 20)//延时20ms=1k时钟计20次达成，清零计时，跳到state2   
+						begin
+						 key_count <= 0;
+						 key_state <= state_2;
+						end
+					else
+						begin
+						 key_count <= key_count + 1'b1;			//未到延时20ms 继续回到state1计时
+						 key_state <= state_1;
+						end 
+				 end 
+		 state_2 :         
+				 begin
+					if(key1&key2&key3) //如果没有按键按下，则跳到state_0		//作用是防抖吗？
+						key_state<=state_0;
+					 else					 //如果仍有按键按下，则到state_3
+						key_state<=state_3;
+				 end
+
+		 state_3 :
+				 begin
+					if		 ((!key1)&key2&key3)//如果按键1按下且只有按键1按下
+						key_value<=2'd1;//	key1_out<=1'b1;
+					else if(key1&(!key2)&key3)//如果按键2按下且只有按键2按下
+						key_value<=2'd2;//	key2_out<=1'b1;
+					else if(key1&key2&(!key3))//如果按键3按下且只有按键3按下
+						key_value<=2'd3;//	key3_out<=1'b1;
+						
+					key_state<=state_4;
+				 end
+		 state_4 :					//等待按键跳起		 
+				begin
+					if(!(key1&key2&key3)) //如果仍有按键按下，则到state_4
+							key_state<=state_4;
+					else					 //如果没有按键按下，则跳到state_5
+							key_state<=state_5;
+				end
+		state_5 :
+				 begin
+					if		 (1==key_value)//如果按键1按下且只有按键1按下		//这里和state3是不是很重复？可不可以精简成1步？
+						key1_out<=1'b1;
+					else if(2==key_value)//如果按键2按下且只有按键2按下
+						key2_out<=1'b1;
+					else if(3==key_value)//如果按键3按下且只有按键3按下
+						key3_out<=1'b1;
+						
+					key_value<=2'd0;			//value清零 跳下一个状态  所以value的意义是作为一个temp吗
+					key_state<=state_6;
+				 end
+		state_6 :
+				 begin
+					key_state<=state_7;		//强行多一个状态
+				 end
+		state_7 :
+//				 begin
+//					key_state<=state_8;
+//				 end	
+				 begin
+					if(key_count > 2)//延时2ms	再跳状态
+						begin
+						 key_count <= 0;
+						 key_state <= state_8;
+						end
+					else
+						begin
+						 key_count <= key_count + 1'b1;
+						 key_state <= state_7;
+						end 
+				end
+		 state_8 :
+				 begin
+						key1_out<=1'b0;
+						key2_out<=1'b0;
+						key3_out<=1'b0;
+						key_state<=state_9;
+				 end
+		 state_9 :
+				 begin
+					key_state<=state_0;
+				 end	
+		default :
+				 begin
+					key_state<=state_0;  //默认情况给state恢复到0处
+				 end 
+		endcase
+	end
+
+endmodule 

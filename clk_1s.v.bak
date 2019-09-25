@@ -1,0 +1,18 @@
+module clk_1s(clk,rst,CP);
+input clk,rst;
+output reg CP;
+
+reg [27:0]count1s;
+
+parameter  T1=28'd11999999;//12499999       加到1199999就等于1s？如何得知
+
+always @(posedge clk or negedge rst)
+ if (!rst)       					//如果按下reset复位
+	     count1s<=28'd0; 		//count1s变成0
+	else  if (count1s==T1)		//当count1s计数到T1的长度  也就是1s的时间
+				begin
+				CP<=~CP;          //CP时钟信号翻转
+				count1s<=28'd0;	//count1s置零
+				end
+			else  count1s<=count1s+28'b1; 	 //没按reset也没记到1s，则count1s加1个数。 
+endmodule

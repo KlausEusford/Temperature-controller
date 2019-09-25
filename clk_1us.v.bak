@@ -1,0 +1,25 @@
+module clk_1us(clk,rst,CP);
+input clk,rst;
+output reg CP;
+
+reg [7:0]count1us;
+
+parameter  T1=7'd11;           				//这里记1us，T1=11
+
+always @(posedge clk or negedge rst)
+ if (!rst)											//如果按下reset
+       begin
+	     count1us<=7'd0;							//count1us清零
+		 end 			
+	else  if (count1us==T1)						//如果count1us计数到T1的值
+				begin
+				CP<=~CP;								//CP时钟信号翻转
+				count1us<=7'd0;					//count1us置零
+				end
+			else  									//当count1us没有计到1us
+			   begin
+			   count1us<=count1us+7'b1;		//count1us加一个数
+ 			end
+			
+			
+endmodule											//与ms和1s的区别就是多了两个begin-end

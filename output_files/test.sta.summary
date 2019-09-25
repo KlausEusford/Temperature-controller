@@ -1,0 +1,221 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -59.063
+TNS   : -861.675
+
+Type  : Slow 1200mV 85C Model Setup 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -28.778
+TNS   : -337.558
+
+Type  : Slow 1200mV 85C Model Setup 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -27.498
+TNS   : -291.215
+
+Type  : Slow 1200mV 85C Model Setup 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -4.538
+TNS   : -443.448
+
+Type  : Slow 1200mV 85C Model Setup 'clock'
+Slack : -3.210
+TNS   : -76.586
+
+Type  : Slow 1200mV 85C Model Setup 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -1.278
+TNS   : -2.920
+
+Type  : Slow 1200mV 85C Model Hold 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -0.402
+TNS   : -0.402
+
+Type  : Slow 1200mV 85C Model Hold 'clock'
+Slack : -0.039
+TNS   : -0.039
+
+Type  : Slow 1200mV 85C Model Hold 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -0.022
+TNS   : -0.022
+
+Type  : Slow 1200mV 85C Model Hold 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : 0.434
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clock'
+Slack : -3.000
+TNS   : -56.532
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -1.487
+TNS   : -248.329
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -1.487
+TNS   : -72.863
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -1.487
+TNS   : -66.915
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -1.487
+TNS   : -17.844
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -1.487
+TNS   : -5.948
+
+Type  : Slow 1200mV 0C Model Setup 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -54.223
+TNS   : -789.625
+
+Type  : Slow 1200mV 0C Model Setup 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -26.407
+TNS   : -309.390
+
+Type  : Slow 1200mV 0C Model Setup 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -25.192
+TNS   : -265.250
+
+Type  : Slow 1200mV 0C Model Setup 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -4.208
+TNS   : -402.404
+
+Type  : Slow 1200mV 0C Model Setup 'clock'
+Slack : -2.905
+TNS   : -66.490
+
+Type  : Slow 1200mV 0C Model Setup 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -1.150
+TNS   : -2.698
+
+Type  : Slow 1200mV 0C Model Hold 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -0.220
+TNS   : -0.220
+
+Type  : Slow 1200mV 0C Model Hold 'clock'
+Slack : -0.027
+TNS   : -0.027
+
+Type  : Slow 1200mV 0C Model Hold 'Tempreture:inst|clk_1us:U1|CP'
+Slack : 0.105
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : 0.384
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : 0.402
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clock'
+Slack : -3.000
+TNS   : -56.532
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -1.487
+TNS   : -248.329
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -1.487
+TNS   : -72.863
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -1.487
+TNS   : -66.915
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -1.487
+TNS   : -17.844
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -1.487
+TNS   : -6.005
+
+Type  : Fast 1200mV 0C Model Setup 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -24.532
+TNS   : -343.206
+
+Type  : Fast 1200mV 0C Model Setup 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -11.789
+TNS   : -137.421
+
+Type  : Fast 1200mV 0C Model Setup 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -11.178
+TNS   : -99.136
+
+Type  : Fast 1200mV 0C Model Setup 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -1.354
+TNS   : -96.194
+
+Type  : Fast 1200mV 0C Model Setup 'clock'
+Slack : -0.785
+TNS   : -13.287
+
+Type  : Fast 1200mV 0C Model Setup 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -0.011
+TNS   : -0.011
+
+Type  : Fast 1200mV 0C Model Hold 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -0.437
+TNS   : -0.452
+
+Type  : Fast 1200mV 0C Model Hold 'clock'
+Slack : -0.221
+TNS   : -0.349
+
+Type  : Fast 1200mV 0C Model Hold 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -0.206
+TNS   : -0.206
+
+Type  : Fast 1200mV 0C Model Hold 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : 0.179
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clock'
+Slack : -3.000
+TNS   : -41.025
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|clk_1us:U1|CP'
+Slack : -1.000
+TNS   : -167.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|clk_1ms:U2|CP'
+Slack : -1.000
+TNS   : -49.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|ds18b20_test:U3|Flag_CmdSET'
+Slack : -1.000
+TNS   : -45.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key2_out'
+Slack : -1.000
+TNS   : -12.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Tempreture:inst|key_rc:U4|key1_out'
+Slack : -1.000
+TNS   : -4.000
+
+------------------------------------------------------------

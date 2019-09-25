@@ -1,0 +1,148 @@
+module pid_parameter(clk,change_p,k_p,k_i,k_d,p_pa,i_pa,d_pa,pid_show);
+input clk;
+input change_p;
+input k_p;
+input k_i;
+input k_d;
+output reg [9:0]p_pa;
+output reg [9:0]i_pa;
+output reg [9:0]d_pa;
+output reg [1:0]pid_show; //0-不显示，1-显示p，2-显示i，3-显示d
+
+initial p_pa=10'd80;				//初始化的pid参数？？
+initial i_pa=10'd400;
+initial d_pa=10'd5;
+initial pid_show=1'b0;
+
+parameter state_0  = 0;
+parameter state_1  = 1;
+parameter state_2  = 2;
+parameter state_3  = 3;
+parameter state_4  = 4;
+parameter state_5  = 5;
+parameter state_6  = 6;
+parameter state_7  = 7;
+parameter state_8  = 8;
+parameter state_9  = 9;
+
+reg	[3:0]key_state;
+reg	[7:0]key_count;
+reg	[2:0]key_value;
+
+initial key_state=0;
+
+always @(posedge clk && (~change_p))
+   begin
+		case(key_state)
+		 state_0 :          
+				 begin
+					 if(k_p&k_i&k_d)//如果没有按键按下，则停在state_0
+						key_state<=state_0;
+					 else					 //如果有一个或多个按键按下，则到state_1
+						key_state<=state_1;
+				 end 
+		 state_1 ://判断按键是否有效
+				 begin
+					if(key_count > 20)//延时20ms
+						begin
+						 key_count <= 0;
+						 key_state <= state_2;
+						end
+					else
+						begin
+						 key_count <= key_count + 1'b1;
+						 key_state <= state_1;
+						end 
+				 end 
+		 state_2 :         
+				 begin
+					if(k_p&k_i&k_d) //如果没有按键按下，则跳到state_0
+						key_state<=state_0;
+					 else					 //如果仍有按键按下，则到state_3
+						key_state<=state_3;
+				 end
+
+		 state_3 :
+				 begin
+					if		 ((!k_p)&k_i&k_d)//如果按键1按下且只有按键1按下
+						key_value<=2'd1;//	key1_out<=1'b1;
+					else if(k_p&(!k_i)&k_d)//如果按键2按下且只有按键2按下
+						key_value<=2'd2;//	key2_out<=1'b1;
+					else if(k_p&k_i&(!k_d))//如果按键3按下且只有按键3按下
+						key_value<=2'd3;//	key3_out<=1'b1;
+						
+					key_state<=state_4;
+				 end
+		 state_4 :					//等待按键跳起		 
+				begin
+					if(!(k_p&k_i&k_d)) //如果仍有按键按下，则到state_4
+							key_state<=state_4;
+					else					 //如果没有按键按下，则跳到state_5
+							key_state<=state_5;
+				end
+		state_5 :
+				 begin
+					case(key_value[2:0])//如果按键1按下且只有按键1按下
+					1:begin
+					   if(p_pa==99)
+						begin
+						   p_pa<=0;
+						end
+    					p_pa<=p_pa+1;
+						pid_show<=1;
+					end
+					//如果按键2按下且只有按键2按下
+					2:begin
+					   if(i_pa==99)
+						begin
+						   i_pa<=0;
+						end
+				   	i_pa<=i_pa+1;
+						pid_show<=2;
+					end
+					//如果按键3按下且只有按键3按下
+					3:begin
+					   if(d_pa==99)
+						begin
+						   d_pa<=0;
+						end
+						d_pa<=d_pa+1;
+					   pid_show<=3;
+					end
+	            endcase				
+					key_value<=2'd0;	
+					key_state<=state_6;
+				 end
+		state_6 :
+				 begin
+					key_state<=state_7;
+				 end
+		state_7 :
+				 begin
+					if(key_count > 20)//延时20ms
+						begin
+						 key_count <= 0;
+						 key_state <= state_8;
+						end
+					else
+						begin
+						 key_count <= key_count + 1'b1;
+						 key_state <= state_7;
+						end 
+				end
+		 state_8 :
+				 begin
+				   pid_show<=0;
+					key_state<=state_9;
+				 end	
+		 state_9 :
+				 begin
+					key_state<=state_0;
+				 end	
+		default :
+				 begin
+					key_state<=state_0;
+				 end 
+		endcase
+	end
+endmodule 

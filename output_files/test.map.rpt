@@ -1,0 +1,1646 @@
+Analysis & Synthesis report for test
+Tue May 28 11:01:23 2019
+Quartus II 64-Bit Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |test|Tempreture:inst|pid_parameter:U9|key_state
+  9. State Machine - |test|Tempreture:inst|work_unity:U7|contCMD
+ 10. State Machine - |test|Tempreture:inst|key_rc:U4|key_value
+ 11. State Machine - |test|Tempreture:inst|key_rc:U4|key_state
+ 12. State Machine - |test|Tempreture:inst|ds18b20_test:U3|ReadBitstate
+ 13. State Machine - |test|Tempreture:inst|ds18b20_test:U3|Readstate
+ 14. State Machine - |test|Tempreture:inst|ds18b20_test:U3|WriteBitstate
+ 15. State Machine - |test|Tempreture:inst|ds18b20_test:U3|WrState
+ 16. State Machine - |test|Tempreture:inst|ds18b20_test:U3|CmdSETstate
+ 17. State Machine - |test|Tempreture:inst|ds18b20_test:U3|Rststate
+ 18. Registers Removed During Synthesis
+ 19. Removed Registers Triggering Further Register Optimizations
+ 20. General Register Statistics
+ 21. Inverted Register Statistics
+ 22. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 23. Parameter Settings for User Entity Instance: Tempreture:inst|clk_1s:U0
+ 24. Parameter Settings for User Entity Instance: Tempreture:inst|clk_1us:U1
+ 25. Parameter Settings for User Entity Instance: Tempreture:inst|clk_1ms:U2
+ 26. Parameter Settings for User Entity Instance: Tempreture:inst|ds18b20_test:U3
+ 27. Parameter Settings for User Entity Instance: Tempreture:inst|key_rc:U4
+ 28. Parameter Settings for User Entity Instance: Tempreture:inst|led_show:U6
+ 29. Parameter Settings for User Entity Instance: Tempreture:inst|work_unity:U7
+ 30. Parameter Settings for User Entity Instance: Tempreture:inst|pid_parameter:U9
+ 31. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div0
+ 32. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div1
+ 33. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod0
+ 34. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod1
+ 35. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div2
+ 36. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div3
+ 37. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod2
+ 38. Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod3
+ 39. Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult1
+ 40. Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_divide:Div0
+ 41. Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult0
+ 42. Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult2
+ 43. Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult3
+ 44. lpm_mult Parameter Settings by Entity Instance
+ 45. Port Connectivity Checks: "Tempreture:inst|pid_parameter:U9"
+ 46. Port Connectivity Checks: "Tempreture:inst|work_unity:U7"
+ 47. Port Connectivity Checks: "Tempreture:inst|led_show:U6"
+ 48. Port Connectivity Checks: "Tempreture:inst|clk_1s:U0"
+ 49. Elapsed Time Per Partition
+ 50. Analysis & Synthesis Messages
+ 51. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                    ;
++------------------------------------+--------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue May 28 11:01:23 2019      ;
+; Quartus II 64-Bit Version          ; 13.0.0 Build 156 04/24/2013 SJ Web Edition ;
+; Revision Name                      ; test                                       ;
+; Top-level Entity Name              ; test                                       ;
+; Family                             ; Cyclone III                                ;
+; Total logic elements               ; 1,946                                      ;
+;     Total combinational functions  ; 1,932                                      ;
+;     Dedicated logic registers      ; 313                                        ;
+; Total registers                    ; 313                                        ;
+; Total pins                         ; 43                                         ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 0                                          ;
+; Embedded Multiplier 9-bit elements ; 0                                          ;
+; Total PLLs                         ; 0                                          ;
++------------------------------------+--------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C25Q240C8       ;                    ;
+; Top-level entity name                                                      ; test               ; test               ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 8      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                 ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                       ; Library ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+---------+
+; work_unity.v                     ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/work_unity.v                           ;         ;
+; Tempreture.v                     ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/Tempreture.v                           ;         ;
+; pid_parameter.v                  ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/pid_parameter.v                        ;         ;
+; led_show.v                       ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/led_show.v                             ;         ;
+; key_rc.v                         ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/key_rc.v                               ;         ;
+; heatercontrol.v                  ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/heatercontrol.v                        ;         ;
+; DS18B20_test.v                   ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/DS18B20_test.v                         ;         ;
+; data_change.v                    ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/data_change.v                          ;         ;
+; clk_1us.v                        ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/clk_1us.v                              ;         ;
+; clk_1s.v                         ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/clk_1s.v                               ;         ;
+; clk_1ms.v                        ; yes             ; User Verilog HDL File              ; C:/Users/admin/Desktop/test/clk_1ms.v                              ;         ;
+; test.bdf                         ; yes             ; User Block Diagram/Schematic File  ; C:/Users/admin/Desktop/test/test.bdf                               ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/lpm_divide.tdf          ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/abs_divider.inc         ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/sign_div_unsign.inc     ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/aglobal130.inc          ;         ;
+; db/lpm_divide_ohm.tdf            ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/lpm_divide_ohm.tdf                  ;         ;
+; db/sign_div_unsign_plh.tdf       ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/sign_div_unsign_plh.tdf             ;         ;
+; db/alt_u_div_t5f.tdf             ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/alt_u_div_t5f.tdf                   ;         ;
+; db/add_sub_unc.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_unc.tdf                     ;         ;
+; db/add_sub_vnc.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_vnc.tdf                     ;         ;
+; db/lpm_divide_lhm.tdf            ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/lpm_divide_lhm.tdf                  ;         ;
+; db/sign_div_unsign_mlh.tdf       ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/sign_div_unsign_mlh.tdf             ;         ;
+; db/alt_u_div_n5f.tdf             ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/alt_u_div_n5f.tdf                   ;         ;
+; db/lpm_divide_o9m.tdf            ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/lpm_divide_o9m.tdf                  ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/lpm_mult.tdf            ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/lpm_add_sub.inc         ;         ;
+; multcore.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/multcore.inc            ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/bypassff.inc            ;         ;
+; altshift.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/altshift.inc            ;         ;
+; multcore.tdf                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/multcore.tdf            ;         ;
+; csa_add.inc                      ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/csa_add.inc             ;         ;
+; mpar_add.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/mpar_add.inc            ;         ;
+; muleabz.inc                      ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/muleabz.inc             ;         ;
+; mul_lfrg.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/mul_lfrg.inc            ;         ;
+; mul_boothc.inc                   ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/mul_boothc.inc          ;         ;
+; alt_ded_mult.inc                 ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/alt_ded_mult.inc        ;         ;
+; alt_ded_mult_y.inc               ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/alt_ded_mult_y.inc      ;         ;
+; dffpipe.inc                      ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/dffpipe.inc             ;         ;
+; mpar_add.tdf                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/mpar_add.tdf            ;         ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;         ;
+; addcore.inc                      ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/addcore.inc             ;         ;
+; look_add.inc                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/look_add.inc            ;         ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;         ;
+; db/add_sub_1eh.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_1eh.tdf                     ;         ;
+; db/add_sub_cfh.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_cfh.tdf                     ;         ;
+; altshift.tdf                     ; yes             ; Megafunction                       ; d:/quartus/quartus/libraries/megafunctions/altshift.tdf            ;         ;
+; db/lpm_divide_phm.tdf            ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/lpm_divide_phm.tdf                  ;         ;
+; db/sign_div_unsign_qlh.tdf       ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/sign_div_unsign_qlh.tdf             ;         ;
+; db/alt_u_div_u5f.tdf             ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/alt_u_div_u5f.tdf                   ;         ;
+; db/add_sub_bfh.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_bfh.tdf                     ;         ;
+; db/add_sub_ffh.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_ffh.tdf                     ;         ;
+; db/add_sub_0eh.tdf               ; yes             ; Auto-Generated Megafunction        ; C:/Users/admin/Desktop/test/db/add_sub_0eh.tdf                     ;         ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------+---------+
+
+
++-----------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                 ;
++---------------------------------------------+-------------------------------+
+; Resource                                    ; Usage                         ;
++---------------------------------------------+-------------------------------+
+; Estimated Total logic elements              ; 1,946                         ;
+;                                             ;                               ;
+; Total combinational functions               ; 1932                          ;
+; Logic element usage by number of LUT inputs ;                               ;
+;     -- 4 input functions                    ; 459                           ;
+;     -- 3 input functions                    ; 576                           ;
+;     -- <=2 input functions                  ; 897                           ;
+;                                             ;                               ;
+; Logic elements by mode                      ;                               ;
+;     -- normal mode                          ; 1197                          ;
+;     -- arithmetic mode                      ; 735                           ;
+;                                             ;                               ;
+; Total registers                             ; 313                           ;
+;     -- Dedicated logic registers            ; 313                           ;
+;     -- I/O registers                        ; 0                             ;
+;                                             ;                               ;
+; I/O pins                                    ; 43                            ;
+; Embedded Multiplier 9-bit elements          ; 0                             ;
+; Maximum fan-out node                        ; Tempreture:inst|clk_1us:U1|CP ;
+; Maximum fan-out                             ; 168                           ;
+; Total fan-out                               ; 6200                          ;
+; Average fan-out                             ; 2.66                          ;
++---------------------------------------------+-------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                          ;
++------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                        ; Library Name ;
++------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+; |test                                                ; 1932 (1)          ; 313 (1)      ; 0           ; 0            ; 0       ; 0         ; 43   ; 0            ; |test                                                                                                                                                      ;              ;
+;    |Tempreture:inst|                                 ; 1931 (0)          ; 312 (0)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst                                                                                                                                      ;              ;
+;       |clk_1ms:U2|                                   ; 44 (44)           ; 27 (27)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|clk_1ms:U2                                                                                                                           ;              ;
+;       |clk_1us:U1|                                   ; 13 (13)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|clk_1us:U1                                                                                                                           ;              ;
+;       |data_change:U5|                               ; 119 (119)         ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|data_change:U5                                                                                                                       ;              ;
+;       |ds18b20_test:U3|                              ; 235 (235)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|ds18b20_test:U3                                                                                                                      ;              ;
+;       |heatercontrol:U8|                             ; 36 (36)           ; 17 (17)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|heatercontrol:U8                                                                                                                     ;              ;
+;       |key_rc:U4|                                    ; 38 (38)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|key_rc:U4                                                                                                                            ;              ;
+;       |led_show:U6|                                  ; 899 (87)          ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6                                                                                                                          ;              ;
+;          |lpm_divide:Div0|                           ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div0                                                                                                          ;              ;
+;             |lpm_divide_ohm:auto_generated|          ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div0|lpm_divide_ohm:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_plh:divider|         ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div0|lpm_divide_ohm:auto_generated|sign_div_unsign_plh:divider                                                ;              ;
+;                   |alt_u_div_t5f:divider|            ; 113 (113)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div0|lpm_divide_ohm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_t5f:divider                          ;              ;
+;          |lpm_divide:Div1|                           ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div1                                                                                                          ;              ;
+;             |lpm_divide_lhm:auto_generated|          ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div1|lpm_divide_lhm:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div1|lpm_divide_lhm:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 108 (108)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div1|lpm_divide_lhm:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;          |lpm_divide:Div2|                           ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div2                                                                                                          ;              ;
+;             |lpm_divide_ohm:auto_generated|          ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div2|lpm_divide_ohm:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_plh:divider|         ; 113 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div2|lpm_divide_ohm:auto_generated|sign_div_unsign_plh:divider                                                ;              ;
+;                   |alt_u_div_t5f:divider|            ; 113 (113)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div2|lpm_divide_ohm:auto_generated|sign_div_unsign_plh:divider|alt_u_div_t5f:divider                          ;              ;
+;          |lpm_divide:Div3|                           ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div3                                                                                                          ;              ;
+;             |lpm_divide_lhm:auto_generated|          ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div3|lpm_divide_lhm:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div3|lpm_divide_lhm:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 108 (108)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Div3|lpm_divide_lhm:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;          |lpm_divide:Mod0|                           ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod0                                                                                                          ;              ;
+;             |lpm_divide_o9m:auto_generated|          ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 74 (74)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;          |lpm_divide:Mod1|                           ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod1                                                                                                          ;              ;
+;             |lpm_divide_o9m:auto_generated|          ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod1|lpm_divide_o9m:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod1|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 108 (108)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod1|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;          |lpm_divide:Mod2|                           ; 77 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod2                                                                                                          ;              ;
+;             |lpm_divide_o9m:auto_generated|          ; 77 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 77 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 77 (77)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;          |lpm_divide:Mod3|                           ; 111 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod3                                                                                                          ;              ;
+;             |lpm_divide_o9m:auto_generated|          ; 111 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod3|lpm_divide_o9m:auto_generated                                                                            ;              ;
+;                |sign_div_unsign_mlh:divider|         ; 111 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod3|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider                                                ;              ;
+;                   |alt_u_div_n5f:divider|            ; 111 (111)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|led_show:U6|lpm_divide:Mod3|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider                          ;              ;
+;       |work_unity:U7|                                ; 547 (279)         ; 44 (44)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7                                                                                                                        ;              ;
+;          |lpm_divide:Div0|                           ; 143 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_divide:Div0                                                                                                        ;              ;
+;             |lpm_divide_phm:auto_generated|          ; 143 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_divide:Div0|lpm_divide_phm:auto_generated                                                                          ;              ;
+;                |sign_div_unsign_qlh:divider|         ; 143 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_divide:Div0|lpm_divide_phm:auto_generated|sign_div_unsign_qlh:divider                                              ;              ;
+;                   |alt_u_div_u5f:divider|            ; 143 (143)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_divide:Div0|lpm_divide_phm:auto_generated|sign_div_unsign_qlh:divider|alt_u_div_u5f:divider                        ;              ;
+;          |lpm_mult:Mult0|                            ; 50 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0                                                                                                         ;              ;
+;             |multcore:mult_core|                     ; 50 (30)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core                                                                                      ;              ;
+;                |mpar_add:padder|                     ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder                                                                      ;              ;
+;                   |lpm_add_sub:adder[0]|             ; 10 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                                 ;              ;
+;                      |add_sub_bfh:auto_generated|    ; 10 (10)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_bfh:auto_generated                      ;              ;
+;                   |lpm_add_sub:adder[1]|             ; 3 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]                                                 ;              ;
+;                      |add_sub_bfh:auto_generated|    ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]|add_sub_bfh:auto_generated                      ;              ;
+;                   |mpar_add:sub_par_add|             ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add                                                 ;              ;
+;                      |lpm_add_sub:adder[0]|          ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]                            ;              ;
+;                         |add_sub_ffh:auto_generated| ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]|add_sub_ffh:auto_generated ;              ;
+;          |lpm_mult:Mult1|                            ; 47 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1                                                                                                         ;              ;
+;             |multcore:mult_core|                     ; 47 (22)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core                                                                                      ;              ;
+;                |mpar_add:padder|                     ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder                                                                      ;              ;
+;                   |lpm_add_sub:adder[0]|             ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                                 ;              ;
+;                      |add_sub_1eh:auto_generated|    ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_1eh:auto_generated                      ;              ;
+;                   |lpm_add_sub:adder[1]|             ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]                                                 ;              ;
+;                      |add_sub_1eh:auto_generated|    ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]|add_sub_1eh:auto_generated                      ;              ;
+;                   |mpar_add:sub_par_add|             ; 11 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add                                                 ;              ;
+;                      |lpm_add_sub:adder[0]|          ; 11 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]                            ;              ;
+;                         |add_sub_cfh:auto_generated| ; 11 (11)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]|add_sub_cfh:auto_generated ;              ;
+;          |lpm_mult:Mult3|                            ; 28 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3                                                                                                         ;              ;
+;             |multcore:mult_core|                     ; 28 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core                                                                                      ;              ;
+;                |mpar_add:padder|                     ; 16 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder                                                                      ;              ;
+;                   |lpm_add_sub:adder[0]|             ; 8 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]                                                 ;              ;
+;                      |add_sub_bfh:auto_generated|    ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]|add_sub_bfh:auto_generated                      ;              ;
+;                   |lpm_add_sub:adder[1]|             ; 2 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]                                                 ;              ;
+;                      |add_sub_bfh:auto_generated|    ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]|add_sub_bfh:auto_generated                      ;              ;
+;                   |mpar_add:sub_par_add|             ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add                                                 ;              ;
+;                      |lpm_add_sub:adder[0]|          ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]                            ;              ;
+;                         |add_sub_ffh:auto_generated| ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |test|Tempreture:inst|work_unity:U7|lpm_mult:Mult3|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]|add_sub_ffh:auto_generated ;              ;
++------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|pid_parameter:U9|key_state                                                                                                                                                       ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------+
+; Name              ; key_state.state_9 ; key_state.state_8 ; key_state.state_7 ; key_state.state_6 ; key_state.state_5 ; key_state.state_4 ; key_state.state_3 ; key_state.state_2 ; key_state.state_1 ; key_state.0000 ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------+
+; key_state.0000    ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0              ;
+; key_state.state_1 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 1              ;
+; key_state.state_2 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 1              ;
+; key_state.state_3 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_4 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_5 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_6 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_7 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_8 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1              ;
+; key_state.state_9 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1              ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|work_unity:U7|contCMD                             ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+; Name            ; contCMD.state_3 ; contCMD.state_2 ; contCMD.state_1 ; contCMD.state_0 ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+; contCMD.state_0 ; 0               ; 0               ; 0               ; 0               ;
+; contCMD.state_1 ; 0               ; 0               ; 1               ; 1               ;
+; contCMD.state_2 ; 0               ; 1               ; 0               ; 1               ;
+; contCMD.state_3 ; 1               ; 0               ; 0               ; 1               ;
++-----------------+-----------------+-----------------+-----------------+-----------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|key_rc:U4|key_value                     ;
++---------------+---------------+---------------+---------------+---------------+
+; Name          ; key_value.011 ; key_value.010 ; key_value.001 ; key_value.000 ;
++---------------+---------------+---------------+---------------+---------------+
+; key_value.000 ; 0             ; 0             ; 0             ; 0             ;
+; key_value.001 ; 0             ; 0             ; 1             ; 1             ;
+; key_value.010 ; 0             ; 1             ; 0             ; 1             ;
+; key_value.011 ; 1             ; 0             ; 0             ; 1             ;
++---------------+---------------+---------------+---------------+---------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|key_rc:U4|key_state                                                                                                                                                                 ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+; Name              ; key_state.state_9 ; key_state.state_8 ; key_state.state_7 ; key_state.state_6 ; key_state.state_5 ; key_state.state_4 ; key_state.state_3 ; key_state.state_2 ; key_state.state_1 ; key_state.state_0 ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+; key_state.state_0 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ;
+; key_state.state_1 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 1                 ;
+; key_state.state_2 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 1                 ;
+; key_state.state_3 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_4 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_5 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_6 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_7 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_8 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ;
+; key_state.state_9 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ;
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|ReadBitstate                                                                                             ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+; Name                 ; ReadBitstate.state_5 ; ReadBitstate.state_4 ; ReadBitstate.state_3 ; ReadBitstate.state_2 ; ReadBitstate.state_1 ; ReadBitstate.state_0 ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+; ReadBitstate.state_0 ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ;
+; ReadBitstate.state_1 ; 0                    ; 0                    ; 0                    ; 0                    ; 1                    ; 1                    ;
+; ReadBitstate.state_2 ; 0                    ; 0                    ; 0                    ; 1                    ; 0                    ; 1                    ;
+; ReadBitstate.state_3 ; 0                    ; 0                    ; 1                    ; 0                    ; 0                    ; 1                    ;
+; ReadBitstate.state_4 ; 0                    ; 1                    ; 0                    ; 0                    ; 0                    ; 1                    ;
+; ReadBitstate.state_5 ; 1                    ; 0                    ; 0                    ; 0                    ; 0                    ; 1                    ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|Readstate               ;
++-------------------+-------------------+-------------------+-------------------+
+; Name              ; Readstate.state_0 ; Readstate.state_2 ; Readstate.state_1 ;
++-------------------+-------------------+-------------------+-------------------+
+; Readstate.state_0 ; 0                 ; 0                 ; 0                 ;
+; Readstate.state_1 ; 1                 ; 0                 ; 1                 ;
+; Readstate.state_2 ; 1                 ; 1                 ; 0                 ;
++-------------------+-------------------+-------------------+-------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|WriteBitstate                                                                                                                           ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; Name                  ; WriteBitstate.state_6 ; WriteBitstate.state_5 ; WriteBitstate.state_4 ; WriteBitstate.state_3 ; WriteBitstate.state_2 ; WriteBitstate.state_1 ; WriteBitstate.state_0 ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+; WriteBitstate.state_0 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ;
+; WriteBitstate.state_1 ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 1                     ;
+; WriteBitstate.state_2 ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 1                     ;
+; WriteBitstate.state_3 ; 0                     ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 1                     ;
+; WriteBitstate.state_4 ; 0                     ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; WriteBitstate.state_5 ; 0                     ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
+; WriteBitstate.state_6 ; 1                     ; 0                     ; 0                     ; 0                     ; 0                     ; 0                     ; 1                     ;
++-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+-----------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|WrState                                             ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+; Name            ; WrState.state_3 ; WrState.state_2 ; WrState.state_1 ; WrState.state_0 ; WrState.state_4 ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+; WrState.state_0 ; 0               ; 0               ; 0               ; 0               ; 0               ;
+; WrState.state_1 ; 0               ; 0               ; 1               ; 1               ; 0               ;
+; WrState.state_2 ; 0               ; 1               ; 0               ; 1               ; 0               ;
+; WrState.state_3 ; 1               ; 0               ; 0               ; 1               ; 0               ;
+; WrState.state_4 ; 0               ; 0               ; 0               ; 1               ; 1               ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|CmdSETstate                                                                                                                                                                                                                              ;
++----------------------+----------------------+----------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+
+; Name                 ; CmdSETstate.state_11 ; CmdSETstate.state_10 ; CmdSETstate.state_9 ; CmdSETstate.state_8 ; CmdSETstate.state_7 ; CmdSETstate.state_6 ; CmdSETstate.state_5 ; CmdSETstate.state_4 ; CmdSETstate.state_3 ; CmdSETstate.state_2 ; CmdSETstate.state_1 ; CmdSETstate.state_0 ;
++----------------------+----------------------+----------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+
+; CmdSETstate.state_0  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ;
+; CmdSETstate.state_1  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ; 1                   ;
+; CmdSETstate.state_2  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ; 0                   ; 1                   ;
+; CmdSETstate.state_3  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_4  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_5  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_6  ; 0                    ; 0                    ; 0                   ; 0                   ; 0                   ; 1                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_7  ; 0                    ; 0                    ; 0                   ; 0                   ; 1                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_8  ; 0                    ; 0                    ; 0                   ; 1                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_9  ; 0                    ; 0                    ; 1                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_10 ; 0                    ; 1                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
+; CmdSETstate.state_11 ; 1                    ; 0                    ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 0                   ; 1                   ;
++----------------------+----------------------+----------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+---------------------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |test|Tempreture:inst|ds18b20_test:U3|Rststate                                                                                                                                                 ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; Name             ; Rststate.state_9 ; Rststate.state_8 ; Rststate.state_7 ; Rststate.state_6 ; Rststate.state_5 ; Rststate.state_4 ; Rststate.state_3 ; Rststate.state_2 ; Rststate.state_1 ; Rststate.state_0 ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+; Rststate.state_0 ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ;
+; Rststate.state_1 ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 1                ;
+; Rststate.state_2 ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 1                ;
+; Rststate.state_3 ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 1                ;
+; Rststate.state_4 ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 1                ;
+; Rststate.state_5 ; 0                ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; Rststate.state_6 ; 0                ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; Rststate.state_7 ; 0                ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; Rststate.state_8 ; 0                ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
+; Rststate.state_9 ; 1                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 0                ; 1                ;
++------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                             ;
++----------------------------------------------------+-----------------------------------------------------------+
+; Register name                                      ; Reason for Removal                                        ;
++----------------------------------------------------+-----------------------------------------------------------+
+; Tempreture:inst|ds18b20_test:U3|Resulth[7]         ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_value[1,2]    ; Merged with Tempreture:inst|pid_parameter:U9|key_value[0] ;
+; Tempreture:inst|work_unity:U7|hter_error[14,15]    ; Merged with Tempreture:inst|work_unity:U7|hter_error[13]  ;
+; Tempreture:inst|pid_parameter:U9|i_pa[4..8]        ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|i_pa[3]           ; Stuck at VCC due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|i_pa[2]           ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|i_pa[1]           ; Stuck at VCC due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|i_pa[0]           ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|p_pa[7..9]        ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|p_pa[6]           ; Stuck at VCC due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|p_pa[3..5]        ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|p_pa[1,2]         ; Stuck at VCC due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|p_pa[0]           ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|i_pa[9]           ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|d_pa[0,1]         ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|d_pa[2]           ; Stuck at VCC due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|d_pa[3..9]        ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|pid_parameter:U9|key_value[0]      ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|work_unity:U7|high_len[15]         ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|pid_parameter:U9|pid_show[1]       ; Merged with Tempreture:inst|pid_parameter:U9|pid_show[0]  ;
+; Tempreture:inst|led_show:U6|sta_p1_in[1]           ; Merged with Tempreture:inst|led_show:U6|sta_p1_in[0]      ;
+; Tempreture:inst|led_show:U6|sta_p2_in[0]           ; Merged with Tempreture:inst|led_show:U6|sta_p1_in[0]      ;
+; Tempreture:inst|led_show:U6|sta_p1_in[2,3]         ; Merged with Tempreture:inst|led_show:U6|sta_p1_in[0]      ;
+; Tempreture:inst|led_show:U6|sta_p2_in[1,3]         ; Merged with Tempreture:inst|led_show:U6|sta_p1_in[0]      ;
+; Tempreture:inst|pid_parameter:U9|pid_show[0]       ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|sta_p1_in[0]           ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|sta_p2_in[2]           ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|sta_p2[0,3,4,7]        ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|sta_p1[6,7]            ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|pid_lock               ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|pid_count[0..9]        ; Stuck at GND due to stuck port clock_enable               ;
+; Tempreture:inst|led_show:U6|sta_p1[0..5]           ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|sta_p2[1,2,5,6]        ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|led_show:U6|cs[0]                  ; Stuck at VCC due to stuck port data_in                    ;
+; Tempreture:inst|work_unity:U7|high_len[13,14]      ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|work_unity:U7|contCMD.state_3      ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state~2       ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state~3       ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state~4       ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state~5       ; Lost fanout                                               ;
+; Tempreture:inst|work_unity:U7|contCMD~6            ; Lost fanout                                               ;
+; Tempreture:inst|work_unity:U7|contCMD~7            ; Lost fanout                                               ;
+; Tempreture:inst|work_unity:U7|contCMD~8            ; Lost fanout                                               ;
+; Tempreture:inst|work_unity:U7|contCMD~9            ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_value~6              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_value~7              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_value~8              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_state~2              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_state~3              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_state~4              ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_state~5              ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~2     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~3     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~4     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~5     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~6     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~7     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~8     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~9     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~10    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~11    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~12    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~13    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~14    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~15    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~16    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|ReadBitstate~17    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~4        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~5        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~6        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~7        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~8        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~9        ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~10       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~11       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~12       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~13       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~14       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~15       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~16       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Readstate~17       ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WriteBitstate~2    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WriteBitstate~3    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WriteBitstate~4    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WriteBitstate~5    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WriteBitstate~6    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WrState~2          ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WrState~3          ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WrState~5          ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|WrState~6          ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~2      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~3      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~4      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~5      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~6      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~7      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~8      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~9      ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~10     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~11     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~12     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~13     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~14     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~15     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~16     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|CmdSETstate~17     ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Rststate~2         ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Rststate~3         ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Rststate~4         ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Rststate~5         ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|Rststate~6         ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_5 ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|pid_parameter:U9|key_count[0..7]   ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.0000    ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_1 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_2 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_3 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_4 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_6 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_7 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_8 ; Lost fanout                                               ;
+; Tempreture:inst|pid_parameter:U9|key_state.state_9 ; Lost fanout                                               ;
+; Tempreture:inst|key_rc:U4|key_value.000            ; Lost fanout                                               ;
+; Tempreture:inst|clk_1ms:U2|count1ms[0]             ; Merged with Tempreture:inst|clk_1us:U1|count1us[0]        ;
+; Tempreture:inst|clk_1ms:U2|count1ms[1]             ; Merged with Tempreture:inst|clk_1us:U1|count1us[1]        ;
+; Tempreture:inst|work_unity:U7|high_len[10..12]     ; Stuck at GND due to stuck port data_in                    ;
+; Tempreture:inst|work_unity:U7|hter_error[12,13]    ; Lost fanout                                               ;
+; Tempreture:inst|ds18b20_test:U3|j[3]               ; Stuck at GND due to stuck port data_in                    ;
+; Total Number of Removed Registers = 180            ;                                                           ;
++----------------------------------------------------+-----------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                          ;
++-----------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+; Register name                                 ; Reason for Removal             ; Registers Removed due to This Register                                              ;
++-----------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+; Tempreture:inst|pid_parameter:U9|i_pa[6]      ; Stuck at GND                   ; Tempreture:inst|led_show:U6|sta_p1_in[0], Tempreture:inst|led_show:U6|sta_p2_in[2], ;
+;                                               ; due to stuck port clock_enable ; Tempreture:inst|led_show:U6|sta_p2[0], Tempreture:inst|led_show:U6|sta_p2[3],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p2[4], Tempreture:inst|led_show:U6|sta_p2[7],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p1[6], Tempreture:inst|led_show:U6|sta_p1[7],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p1[5], Tempreture:inst|led_show:U6|sta_p1[4],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p1[3], Tempreture:inst|led_show:U6|sta_p1[2],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p1[1], Tempreture:inst|led_show:U6|sta_p1[0],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p2[6], Tempreture:inst|led_show:U6|sta_p2[5],       ;
+;                                               ;                                ; Tempreture:inst|led_show:U6|sta_p2[2], Tempreture:inst|led_show:U6|sta_p2[1]        ;
+; Tempreture:inst|pid_parameter:U9|key_state~2  ; Lost Fanouts                   ; Tempreture:inst|pid_parameter:U9|key_count[7],                                      ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_count[5],                                      ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.0000,                                    ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_1,                                 ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_2,                                 ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_6,                                 ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_7,                                 ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_8                                  ;
+; Tempreture:inst|pid_parameter:U9|p_pa[0]      ; Stuck at GND                   ; Tempreture:inst|work_unity:U7|high_len[15],                                         ;
+;                                               ; due to stuck port clock_enable ; Tempreture:inst|work_unity:U7|high_len[14],                                         ;
+;                                               ;                                ; Tempreture:inst|work_unity:U7|high_len[13],                                         ;
+;                                               ;                                ; Tempreture:inst|work_unity:U7|high_len[12],                                         ;
+;                                               ;                                ; Tempreture:inst|work_unity:U7|high_len[11],                                         ;
+;                                               ;                                ; Tempreture:inst|work_unity:U7|high_len[10]                                          ;
+; Tempreture:inst|pid_parameter:U9|key_state~4  ; Lost Fanouts                   ; Tempreture:inst|pid_parameter:U9|key_count[6],                                      ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_count[4],                                      ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_count[3],                                      ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_3,                                 ;
+;                                               ;                                ; Tempreture:inst|pid_parameter:U9|key_state.state_4                                  ;
+; Tempreture:inst|pid_parameter:U9|key_value[0] ; Stuck at GND                   ; Tempreture:inst|pid_parameter:U9|pid_show[0], Tempreture:inst|led_show:U6|cs[0]     ;
+;                                               ; due to stuck port data_in      ;                                                                                     ;
+; Tempreture:inst|led_show:U6|pid_lock          ; Stuck at GND                   ; Tempreture:inst|led_show:U6|pid_count[1]                                            ;
+;                                               ; due to stuck port data_in      ;                                                                                     ;
++-----------------------------------------------+--------------------------------+-------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 313   ;
+; Number of registers using Synchronous Clear  ; 61    ;
+; Number of registers using Synchronous Load   ; 19    ;
+; Number of registers using Asynchronous Clear ; 34    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 225   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-------------------------------------------------------+
+; Inverted Register Statistics                          ;
++---------------------------------------------+---------+
+; Inverted Register                           ; Fan out ;
++---------------------------------------------+---------+
+; Tempreture:inst|data_change:U5|data_warn[7] ; 24      ;
+; Tempreture:inst|data_change:U5|data_warn[6] ; 25      ;
+; Tempreture:inst|data_change:U5|data_warn[3] ; 25      ;
+; Total number of inverted registers = 3      ;         ;
++---------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |test|Tempreture:inst|work_unity:U7|hter_error[4]      ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |test|Tempreture:inst|pid_parameter:U9|key_count[1]    ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |test|Tempreture:inst|heatercontrol:U8|point_now[7]    ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |test|Tempreture:inst|led_show:U6|data[0]              ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |test|Tempreture:inst|ds18b20_test:U3|ResultDS18B20[2] ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |test|Tempreture:inst|work_unity:U7|hter_esum[2]       ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |test|Tempreture:inst|key_rc:U4|key_count[4]           ;
+; 11:1               ; 7 bits    ; 49 LEs        ; 28 LEs               ; 21 LEs                 ; Yes        ; |test|Tempreture:inst|data_change:U5|data_warn[9]      ;
+; 7:1                ; 15 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; Yes        ; |test|Tempreture:inst|work_unity:U7|high_len[5]        ;
+; 7:1                ; 12 bits   ; 48 LEs        ; 12 LEs               ; 36 LEs                 ; Yes        ; |test|Tempreture:inst|ds18b20_test:U3|data[0]          ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 16 LEs               ; 80 LEs                 ; Yes        ; |test|Tempreture:inst|ds18b20_test:U3|CountRbitStep[4] ;
+; 11:1               ; 8 bits    ; 56 LEs        ; 8 LEs                ; 48 LEs                 ; Yes        ; |test|Tempreture:inst|ds18b20_test:U3|CountWbitStep[5] ;
+; 13:1               ; 11 bits   ; 88 LEs        ; 11 LEs               ; 77 LEs                 ; Yes        ; |test|Tempreture:inst|ds18b20_test:U3|CountRstStep[3]  ;
+; 11:1               ; 3 bits    ; 21 LEs        ; 12 LEs               ; 9 LEs                  ; Yes        ; |test|Tempreture:inst|data_change:U5|data_warn[7]      ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; No         ; |test|Tempreture:inst|ds18b20_test:U3|Selector148      ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |test|Tempreture:inst|ds18b20_test:U3|j                ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; No         ; |test|Tempreture:inst|ds18b20_test:U3|ResultDS18B20    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |test|Tempreture:inst|ds18b20_test:U3|Selector119      ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |test|Tempreture:inst|ds18b20_test:U3|Selector180      ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |test|Tempreture:inst|key_rc:U4|key_value              ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |test|Tempreture:inst|led_show:U6|Mux7                 ;
+; 9:1                ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |test|Tempreture:inst|led_show:U6|Mux0                 ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 8 LEs                ; 2 LEs                  ; No         ; |test|Tempreture:inst|work_unity:U7|contCMD            ;
+; 8:1                ; 2 bits    ; 10 LEs        ; 8 LEs                ; 2 LEs                  ; No         ; |test|Tempreture:inst|work_unity:U7|contCMD            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------+
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|clk_1s:U0 ;
++----------------+------------------------------+------------------------+
+; Parameter Name ; Value                        ; Type                   ;
++----------------+------------------------------+------------------------+
+; T1             ; 0000101101110001101011111111 ; Unsigned Binary        ;
++----------------+------------------------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|clk_1us:U1 ;
++----------------+---------+----------------------------------------------+
+; Parameter Name ; Value   ; Type                                         ;
++----------------+---------+----------------------------------------------+
+; T1             ; 0001011 ; Unsigned Binary                              ;
++----------------+---------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|clk_1ms:U2 ;
++----------------+------------------------------+-------------------------+
+; Parameter Name ; Value                        ; Type                    ;
++----------------+------------------------------+-------------------------+
+; T1             ; 0000000000000010111011011111 ; Unsigned Binary         ;
++----------------+------------------------------+-------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|ds18b20_test:U3 ;
++----------------+-------+-----------------------------------------------------+
+; Parameter Name ; Value ; Type                                                ;
++----------------+-------+-----------------------------------------------------+
+; state_0        ; 0     ; Signed Integer                                      ;
+; state_1        ; 1     ; Signed Integer                                      ;
+; state_2        ; 2     ; Signed Integer                                      ;
+; state_3        ; 3     ; Signed Integer                                      ;
+; state_4        ; 4     ; Signed Integer                                      ;
+; state_5        ; 5     ; Signed Integer                                      ;
+; state_6        ; 6     ; Signed Integer                                      ;
+; state_7        ; 7     ; Signed Integer                                      ;
+; state_8        ; 8     ; Signed Integer                                      ;
+; state_9        ; 9     ; Signed Integer                                      ;
+; state_10       ; 10    ; Signed Integer                                      ;
+; state_11       ; 11    ; Signed Integer                                      ;
+; state_12       ; 12    ; Signed Integer                                      ;
+; state_13       ; 13    ; Signed Integer                                      ;
+; state_14       ; 14    ; Signed Integer                                      ;
+; state_15       ; 15    ; Signed Integer                                      ;
+; state_16       ; 16    ; Signed Integer                                      ;
+; state_17       ; 17    ; Signed Integer                                      ;
++----------------+-------+-----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|key_rc:U4 ;
++----------------+-------+-----------------------------------------------+
+; Parameter Name ; Value ; Type                                          ;
++----------------+-------+-----------------------------------------------+
+; state_0        ; 0     ; Signed Integer                                ;
+; state_1        ; 1     ; Signed Integer                                ;
+; state_2        ; 2     ; Signed Integer                                ;
+; state_3        ; 3     ; Signed Integer                                ;
+; state_4        ; 4     ; Signed Integer                                ;
+; state_5        ; 5     ; Signed Integer                                ;
+; state_6        ; 6     ; Signed Integer                                ;
+; state_7        ; 7     ; Signed Integer                                ;
+; state_8        ; 8     ; Signed Integer                                ;
+; state_9        ; 9     ; Signed Integer                                ;
++----------------+-------+-----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|led_show:U6 ;
++----------------+----------+----------------------------------------------+
+; Parameter Name ; Value    ; Type                                         ;
++----------------+----------+----------------------------------------------+
+; SEG_NUM0       ; 11000000 ; Unsigned Binary                              ;
+; SEG_NUM1       ; 11111001 ; Unsigned Binary                              ;
+; SEG_NUM2       ; 10100100 ; Unsigned Binary                              ;
+; SEG_NUM3       ; 10110000 ; Unsigned Binary                              ;
+; SEG_NUM4       ; 10011001 ; Unsigned Binary                              ;
+; SEG_NUM5       ; 10010010 ; Unsigned Binary                              ;
+; SEG_NUM6       ; 10000010 ; Unsigned Binary                              ;
+; SEG_NUM7       ; 11111000 ; Unsigned Binary                              ;
+; SEG_NUM8       ; 10000000 ; Unsigned Binary                              ;
+; SEG_NUM9       ; 10010000 ; Unsigned Binary                              ;
+; SEG_DU         ; 11111111 ; Unsigned Binary                              ;
+; SEG_C          ; 11111111 ; Unsigned Binary                              ;
+; SEG_P          ; 10001100 ; Unsigned Binary                              ;
+; SEG_I          ; 11001111 ; Unsigned Binary                              ;
+; SEG_D          ; 10100001 ; Unsigned Binary                              ;
+; SEG_NULL       ; 11111111 ; Unsigned Binary                              ;
++----------------+----------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|work_unity:U7 ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; state_0        ; 0     ; Signed Integer                                    ;
+; state_1        ; 1     ; Signed Integer                                    ;
+; state_2        ; 2     ; Signed Integer                                    ;
+; state_3        ; 3     ; Signed Integer                                    ;
+; state_4        ; 4     ; Signed Integer                                    ;
+; state_5        ; 5     ; Signed Integer                                    ;
+; state_6        ; 6     ; Signed Integer                                    ;
+; state_7        ; 7     ; Signed Integer                                    ;
+; state_8        ; 8     ; Signed Integer                                    ;
+; state_9        ; 9     ; Signed Integer                                    ;
+; state_10       ; 10    ; Signed Integer                                    ;
+; state_11       ; 11    ; Signed Integer                                    ;
+; state_12       ; 12    ; Signed Integer                                    ;
+; state_13       ; 13    ; Signed Integer                                    ;
+; state_14       ; 14    ; Signed Integer                                    ;
+; state_15       ; 15    ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Tempreture:inst|pid_parameter:U9 ;
++----------------+-------+------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                 ;
++----------------+-------+------------------------------------------------------+
+; state_0        ; 0     ; Signed Integer                                       ;
+; state_1        ; 1     ; Signed Integer                                       ;
+; state_2        ; 2     ; Signed Integer                                       ;
+; state_3        ; 3     ; Signed Integer                                       ;
+; state_4        ; 4     ; Signed Integer                                       ;
+; state_5        ; 5     ; Signed Integer                                       ;
+; state_6        ; 6     ; Signed Integer                                       ;
+; state_7        ; 7     ; Signed Integer                                       ;
+; state_8        ; 8     ; Signed Integer                                       ;
+; state_9        ; 9     ; Signed Integer                                       ;
++----------------+-------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div0 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 7              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_ohm ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div1 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_lhm ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod0 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_o9m ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod1 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_o9m ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div2 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 7              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_ohm ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Div3 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_lhm ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod2 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_o9m ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|led_show:U6|lpm_divide:Mod3 ;
++------------------------+----------------+----------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                               ;
++------------------------+----------------+----------------------------------------------------+
+; LPM_WIDTHN             ; 12             ; Untyped                                            ;
+; LPM_WIDTHD             ; 4              ; Untyped                                            ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                            ;
+; LPM_PIPELINE           ; 0              ; Untyped                                            ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                            ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                            ;
+; CBXI_PARAMETER         ; lpm_divide_o9m ; Untyped                                            ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                            ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                            ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                         ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                       ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                       ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                     ;
++------------------------+----------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult1 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 4           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 20          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 20          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_divide:Div0 ;
++------------------------+----------------+------------------------------------------------------+
+; Parameter Name         ; Value          ; Type                                                 ;
++------------------------+----------------+------------------------------------------------------+
+; LPM_WIDTHN             ; 26             ; Untyped                                              ;
+; LPM_WIDTHD             ; 2              ; Untyped                                              ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                                              ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                                              ;
+; LPM_PIPELINE           ; 0              ; Untyped                                              ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                                              ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                                              ;
+; CBXI_PARAMETER         ; lpm_divide_phm ; Untyped                                              ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                                              ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                                              ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY                                           ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY                                         ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                         ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                       ;
++------------------------+----------------+------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult0 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 7           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 23          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 23          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult2 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 3           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 19          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 19          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: Tempreture:inst|work_unity:U7|lpm_mult:Mult3 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 16          ; Untyped                        ;
+; LPM_WIDTHB                                     ; 7           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 23          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 23          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 6           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                                       ;
++---------------------------------------+----------------------------------------------+
+; Name                                  ; Value                                        ;
++---------------------------------------+----------------------------------------------+
+; Number of entity instances            ; 4                                            ;
+; Entity Instance                       ; Tempreture:inst|work_unity:U7|lpm_mult:Mult1 ;
+;     -- LPM_WIDTHA                     ; 16                                           ;
+;     -- LPM_WIDTHB                     ; 4                                            ;
+;     -- LPM_WIDTHP                     ; 20                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                          ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
+; Entity Instance                       ; Tempreture:inst|work_unity:U7|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 16                                           ;
+;     -- LPM_WIDTHB                     ; 7                                            ;
+;     -- LPM_WIDTHP                     ; 23                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                          ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
+; Entity Instance                       ; Tempreture:inst|work_unity:U7|lpm_mult:Mult2 ;
+;     -- LPM_WIDTHA                     ; 16                                           ;
+;     -- LPM_WIDTHB                     ; 3                                            ;
+;     -- LPM_WIDTHP                     ; 19                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                          ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
+; Entity Instance                       ; Tempreture:inst|work_unity:U7|lpm_mult:Mult3 ;
+;     -- LPM_WIDTHA                     ; 16                                           ;
+;     -- LPM_WIDTHB                     ; 7                                            ;
+;     -- LPM_WIDTHP                     ; 23                                           ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                     ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; YES                                          ;
+;     -- USE_EAB                        ; OFF                                          ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                         ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                           ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                           ;
++---------------------------------------+----------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Tempreture:inst|pid_parameter:U9"                                                                                        ;
++------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                                  ;
++------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+
+; p_pa ; Output ; Warning  ; Output or bidir port (10 bits) is wider than the port expression (7 bits) it drives; bit(s) "p_pa[9..7]" have no fanouts ;
+; i_pa ; Output ; Warning  ; Output or bidir port (10 bits) is wider than the port expression (7 bits) it drives; bit(s) "i_pa[9..7]" have no fanouts ;
+; d_pa ; Output ; Warning  ; Output or bidir port (10 bits) is wider than the port expression (7 bits) it drives; bit(s) "d_pa[9..7]" have no fanouts ;
++------+--------+----------+--------------------------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Tempreture:inst|work_unity:U7"                                                                                                                   ;
++--------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port   ; Type  ; Severity ; Details                                                                                                                                         ;
++--------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; p_para ; Input ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "p_para[9..7]" will be connected to GND. ;
+; i_para ; Input ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "i_para[9..7]" will be connected to GND. ;
+; d_para ; Input ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "d_para[9..7]" will be connected to GND. ;
++--------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Tempreture:inst|led_show:U6"                                                                                                                        ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                                                         ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+; p_data   ; Input  ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "p_data[9..7]" will be connected to GND. ;
+; i_data   ; Input  ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "i_data[9..7]" will be connected to GND. ;
+; d_data   ; Input  ; Warning  ; Input port expression (7 bits) is smaller than the input port (10 bits) it drives.  Extra input bit(s) "d_data[9..7]" will be connected to GND. ;
+; pid_lock ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Tempreture:inst|clk_1s:U0"                                                          ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; CP   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:09     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.0 Build 156 04/24/2013 SJ Web Edition
+    Info: Processing started: Tue May 28 11:01:09 2019
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off test -c test
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 1 design units, including 1 entities, in source file work_unity.v
+    Info (12023): Found entity 1: work_unity
+Info (12021): Found 1 design units, including 1 entities, in source file tempreture.v
+    Info (12023): Found entity 1: Tempreture
+Warning (10261): Verilog HDL Event Control warning at pid_parameter.v(34): Event Control contains a complex event expression
+Info (12021): Found 1 design units, including 1 entities, in source file pid_parameter.v
+    Info (12023): Found entity 1: pid_parameter
+Info (12021): Found 1 design units, including 1 entities, in source file led_show.v
+    Info (12023): Found entity 1: led_show
+Info (12021): Found 1 design units, including 1 entities, in source file key_rc.v
+    Info (12023): Found entity 1: key_rc
+Info (12021): Found 1 design units, including 1 entities, in source file heatercontrol.v
+    Info (12023): Found entity 1: heatercontrol
+Info (12021): Found 1 design units, including 1 entities, in source file ds18b20_test.v
+    Info (12023): Found entity 1: ds18b20_test
+Warning (10261): Verilog HDL Event Control warning at data_change.v(12): Event Control contains a complex event expression
+Warning (10261): Verilog HDL Event Control warning at data_change.v(47): Event Control contains a complex event expression
+Info (12021): Found 1 design units, including 1 entities, in source file data_change.v
+    Info (12023): Found entity 1: data_change
+Info (12021): Found 1 design units, including 1 entities, in source file clk_1us.v
+    Info (12023): Found entity 1: clk_1us
+Info (12021): Found 1 design units, including 1 entities, in source file clk_1s.v
+    Info (12023): Found entity 1: clk_1s
+Info (12021): Found 1 design units, including 1 entities, in source file clk_1ms.v
+    Info (12023): Found entity 1: clk_1ms
+Info (12021): Found 1 design units, including 1 entities, in source file test.bdf
+    Info (12023): Found entity 1: test
+Info (12127): Elaborating entity "test" for the top level hierarchy
+Warning (275011): Block or symbol "NOT" of instance "inst4" overlaps another block or symbol
+Warning (275011): Block or symbol "NOT" of instance "inst1" overlaps another block or symbol
+Info (12128): Elaborating entity "Tempreture" for hierarchy "Tempreture:inst"
+Info (12128): Elaborating entity "clk_1s" for hierarchy "Tempreture:inst|clk_1s:U0"
+Info (12128): Elaborating entity "clk_1us" for hierarchy "Tempreture:inst|clk_1us:U1"
+Info (12128): Elaborating entity "clk_1ms" for hierarchy "Tempreture:inst|clk_1ms:U2"
+Info (12128): Elaborating entity "ds18b20_test" for hierarchy "Tempreture:inst|ds18b20_test:U3"
+Warning (10776): Verilog HDL warning at DS18B20_test.v(171): variable indcmd in static task or function Write_DS18B20 may have unintended latch behavior
+Warning (10230): Verilog HDL assignment warning at DS18B20_test.v(586): truncated value with size 32 to match size of target (20)
+Warning (10230): Verilog HDL assignment warning at DS18B20_test.v(587): truncated value with size 32 to match size of target (12)
+Info (12128): Elaborating entity "key_rc" for hierarchy "Tempreture:inst|key_rc:U4"
+Info (12128): Elaborating entity "data_change" for hierarchy "Tempreture:inst|data_change:U5"
+Info (12128): Elaborating entity "led_show" for hierarchy "Tempreture:inst|led_show:U6"
+Warning (10230): Verilog HDL assignment warning at led_show.v(51): truncated value with size 8 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at led_show.v(57): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(58): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(61): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(66): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(67): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(71): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(72): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(108): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(110): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(111): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(114): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(120): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(122): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(123): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(128): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(130): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(131): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(153): truncated value with size 8 to match size of target (3)
+Warning (10230): Verilog HDL assignment warning at led_show.v(165): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(167): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(168): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(172): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(174): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(175): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(179): truncated value with size 8 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(181): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at led_show.v(182): truncated value with size 32 to match size of target (4)
+Info (12128): Elaborating entity "work_unity" for hierarchy "Tempreture:inst|work_unity:U7"
+Warning (10230): Verilog HDL assignment warning at work_unity.v(62): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at work_unity.v(77): truncated value with size 32 to match size of target (16)
+Warning (10230): Verilog HDL assignment warning at work_unity.v(129): truncated value with size 32 to match size of target (4)
+Info (12128): Elaborating entity "heatercontrol" for hierarchy "Tempreture:inst|heatercontrol:U8"
+Info (12128): Elaborating entity "pid_parameter" for hierarchy "Tempreture:inst|pid_parameter:U9"
+Warning (10230): Verilog HDL assignment warning at pid_parameter.v(91): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at pid_parameter.v(100): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at pid_parameter.v(109): truncated value with size 32 to match size of target (10)
+Info (278001): Inferred 13 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Div0"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Div1"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Mod0"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Mod1"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Div2"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Div3"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Mod2"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|led_show:U6|Mod3"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Tempreture:inst|work_unity:U7|Mult1"
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Tempreture:inst|work_unity:U7|Div0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Tempreture:inst|work_unity:U7|Mult0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Tempreture:inst|work_unity:U7|Mult2"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Tempreture:inst|work_unity:U7|Mult3"
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|led_show:U6|lpm_divide:Div0"
+Info (12133): Instantiated megafunction "Tempreture:inst|led_show:U6|lpm_divide:Div0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "12"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_ohm.tdf
+    Info (12023): Found entity 1: lpm_divide_ohm
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_plh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_plh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_t5f.tdf
+    Info (12023): Found entity 1: alt_u_div_t5f
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_unc.tdf
+    Info (12023): Found entity 1: add_sub_unc
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_vnc.tdf
+    Info (12023): Found entity 1: add_sub_vnc
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|led_show:U6|lpm_divide:Div1"
+Info (12133): Instantiated megafunction "Tempreture:inst|led_show:U6|lpm_divide:Div1" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "12"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_lhm.tdf
+    Info (12023): Found entity 1: lpm_divide_lhm
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_mlh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_mlh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_n5f.tdf
+    Info (12023): Found entity 1: alt_u_div_n5f
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|led_show:U6|lpm_divide:Mod0"
+Info (12133): Instantiated megafunction "Tempreture:inst|led_show:U6|lpm_divide:Mod0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "12"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_o9m.tdf
+    Info (12023): Found entity 1: lpm_divide_o9m
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|led_show:U6|lpm_divide:Div2"
+Info (12133): Instantiated megafunction "Tempreture:inst|led_show:U6|lpm_divide:Div2" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "12"
+    Info (12134): Parameter "LPM_WIDTHD" = "7"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12133): Instantiated megafunction "Tempreture:inst|work_unity:U7|lpm_mult:Mult1" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "4"
+    Info (12134): Parameter "LPM_WIDTHP" = "20"
+    Info (12134): Parameter "LPM_WIDTHR" = "20"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_1eh.tdf
+    Info (12023): Found entity 1: add_sub_1eh
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_cfh.tdf
+    Info (12023): Found entity 1: add_sub_cfh
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1|altshift:external_latency_ffs", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult1"
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_divide:Div0"
+Info (12133): Instantiated megafunction "Tempreture:inst|work_unity:U7|lpm_divide:Div0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHN" = "26"
+    Info (12134): Parameter "LPM_WIDTHD" = "2"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_phm.tdf
+    Info (12023): Found entity 1: lpm_divide_phm
+Info (12021): Found 1 design units, including 1 entities, in source file db/sign_div_unsign_qlh.tdf
+    Info (12023): Found entity 1: sign_div_unsign_qlh
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_u5f.tdf
+    Info (12023): Found entity 1: alt_u_div_u5f
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12133): Instantiated megafunction "Tempreture:inst|work_unity:U7|lpm_mult:Mult0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "7"
+    Info (12134): Parameter "LPM_WIDTHP" = "23"
+    Info (12134): Parameter "LPM_WIDTHR" = "23"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_bfh.tdf
+    Info (12023): Found entity 1: add_sub_bfh
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_ffh.tdf
+    Info (12023): Found entity 1: add_sub_ffh
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0|altshift:external_latency_ffs", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult0"
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12133): Instantiated megafunction "Tempreture:inst|work_unity:U7|lpm_mult:Mult2" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "3"
+    Info (12134): Parameter "LPM_WIDTHP" = "19"
+    Info (12134): Parameter "LPM_WIDTHR" = "19"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|multcore:mult_core", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[1]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_0eh.tdf
+    Info (12023): Found entity 1: add_sub_0eh
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12131): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2|altshift:external_latency_ffs", which is child of megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult2"
+Info (12130): Elaborated megafunction instantiation "Tempreture:inst|work_unity:U7|lpm_mult:Mult3"
+Info (12133): Instantiated megafunction "Tempreture:inst|work_unity:U7|lpm_mult:Mult3" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "16"
+    Info (12134): Parameter "LPM_WIDTHB" = "7"
+    Info (12134): Parameter "LPM_WIDTHP" = "23"
+    Info (12134): Parameter "LPM_WIDTHR" = "23"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "YES"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Warning (12241): 3 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "ledco[0]" is stuck at VCC
+    Warning (13410): Pin "sledp1[7]" is stuck at VCC
+    Warning (13410): Pin "sledp1[6]" is stuck at VCC
+    Warning (13410): Pin "sledp1[5]" is stuck at VCC
+    Warning (13410): Pin "sledp1[4]" is stuck at VCC
+    Warning (13410): Pin "sledp1[3]" is stuck at VCC
+    Warning (13410): Pin "sledp1[2]" is stuck at VCC
+    Warning (13410): Pin "sledp1[1]" is stuck at VCC
+    Warning (13410): Pin "sledp1[0]" is stuck at VCC
+    Warning (13410): Pin "sledp2[7]" is stuck at VCC
+    Warning (13410): Pin "sledp2[6]" is stuck at VCC
+    Warning (13410): Pin "sledp2[5]" is stuck at VCC
+    Warning (13410): Pin "sledp2[4]" is stuck at VCC
+    Warning (13410): Pin "sledp2[3]" is stuck at VCC
+    Warning (13410): Pin "sledp2[2]" is stuck at VCC
+    Warning (13410): Pin "sledp2[1]" is stuck at VCC
+    Warning (13410): Pin "sledp2[0]" is stuck at VCC
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 97 registers lost all their fanouts during netlist optimizations.
+Info (17016): Found the following redundant logic cells in design
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_6_result_int[0]~10"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_7_result_int[0]~10"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_8_result_int[0]~10"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod0|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_10_result_int[0]~10"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_11_result_int[0]~0"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_8_result_int[0]~10"
+    Info (17048): Logic cell "Tempreture:inst|led_show:U6|lpm_divide:Mod2|lpm_divide_o9m:auto_generated|sign_div_unsign_mlh:divider|alt_u_div_n5f:divider|add_sub_10_result_int[0]~10"
+Info (144001): Generated suppressed messages file C:/Users/admin/Desktop/test/output_files/test.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 2000 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 37 output pins
+    Info (21060): Implemented 1 bidirectional pins
+    Info (21061): Implemented 1957 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 62 warnings
+    Info: Peak virtual memory: 4646 megabytes
+    Info: Processing ended: Tue May 28 11:01:23 2019
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:11
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/admin/Desktop/test/output_files/test.map.smsg.
+
+
